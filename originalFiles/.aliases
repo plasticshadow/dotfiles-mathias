@@ -5,74 +5,38 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-# --> from NickSP dotfiles `bash_profile`
-alias .3='cd ../../../'                     # Go back 3 directory levels
-alias .4='cd ../../../../'                  # Go back 4 directory levels
-alias .5='cd ../../../../../'               # Go back 5 directory levels
-alias .6='cd ../../../../../../'            # Go back 6 directory levels
-# <--
 alias ~="cd ~" # `cd` is probably faster to type though
-#alias -- -="cd -" #EDIT: -- doesn't work and -= may have been an error
+alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Dropbox"
+alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-#alias p="cd ~/projects"
-alias rps="cd ~/.repos"
-alias bedo="cd ~/.repos/Bedo-Virtual-Pet"
-alias pp="cd ~/.appDesign"
-alias bedobb="cd ~/.appDesign/Blender\ Docs"
-alias bedornd="cd ~/.appDesign/Blender\ Docs/multiSync/PreBETA_Test_Renders"
-alias bedox="cd ~/.appDesign/XcodeDocs"
+alias p="cd ~/projects"
 alias g="git"
-alias hb="cd /usr/local/Cellar"
 alias h="history"
 alias j="jobs"
 
-# from NickSP Dotfiles - bash_profile
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias show_options='shopt'                  # Show_options: display bash options settings
-#alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
-alias cic='set completion-ignore-case On'   # cic:          Make tab-completion case-insensitive
-alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
-
 # Detect which `ls` flavor is in use
-#if ls --color > /dev/null 2>&1; then # GNU `ls`
-#	colorflag="--color"
-#	export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
-#else # macOS `ls`
-#	colorflag="-G"
-#	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
-#fi
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+	export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+else # macOS `ls`
+	colorflag="-G"
+	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
+fi
 
-# THE ABOVE TEST WAS FAILING AND KEPT SETTING colorflag to "-G", even though ls being called is the GNU version via Homebrew CoreUtils.
-# ALSO, LS_COLORS WS SETTING ODD COLORS - MY QUICK FIX:
-colorflag="--color"
+# List all files colorized in long format
+alias l="ls -lF ${colorflag}"
+
+# List all files colorized in long format, including dot files
+alias la="ls -laF ${colorflag}"
+
+# List only directories
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
-
-# List all files colorized in long format
-alias l="ls -lhF"
-
-# List all files colorized in long format, including dot files
-alias la="ls -lhAF"
-
-# List only directories
-alias lsd="ls -lhF ${colorflag} | grep --color=never '^d'"
-
-# Always use color output for `ls`
-#alias ls="command ls ${colorflag}"
-
-# myOBP EXTRAS 
-alias cl='clear'
-alias rless='less -R'
-alias ll='l | rless' 
-alias lal='la | rless'
-alias cla='clear; la'
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
@@ -93,26 +57,12 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 
 # Google Chrome
-# THIS DOESN'T WORK FOR WHATEVER REASON - OPENS CHROME BUT GIVES NS ERROR
-#alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome %s &'
-
-# myOBP - APPS: ####
-#    `w3m` opens with the Bookmarks page
-alias w3='w3m -B'
-alias firefox='open -a Firefox.app'
-alias blender=/Applications/Blender/blender.app/Contents/MacOS/blender
-alias ImageOptim=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
-#    rename files by removing leading-zeros (png)
-alias pngrmz='for i in *.png; do mv $i ${i/00/}; done'
-# - - - - - - - -
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-
-# *myOBP - IP
-alias mypip='curl ipecho.net/plain :'
 
 # Show active network interfaces
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"

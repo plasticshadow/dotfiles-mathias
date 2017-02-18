@@ -5,13 +5,11 @@
 # Heavily inspired by @necolas’s prompt: https://github.com/necolas/dotfiles
 # iTerm → Profiles → Text → use 13pt Monaco with 1.1 vertical spacing.
 
-# DISABLED THIS HEAD BECAUSE I SET UP ITERM MANUALLY - AND 256 NOT PREFERRED FOR SOLARIZED
-
-#if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
-#	export TERM='gnome-256color';
-#elif infocmp xterm-256color >/dev/null 2>&1; then
-#	export TERM='xterm-256color';
-#fi;
+if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+	export TERM='gnome-256color';
+elif infocmp xterm-256color >/dev/null 2>&1; then
+	export TERM='xterm-256color';
+fi;
 
 prompt_git() {
 	local s='';
@@ -110,7 +108,6 @@ fi;
 # Set the terminal title and prompt.
 PS1="\[\033]0;\W\007\]"; # working directory base name
 PS1+="\[${bold}\]\n"; # newline
-#PS1+="\[${bold}\] "; # newline - EDIT: got rid of newline character
 PS1+="\[${userStyle}\]\u"; # username
 PS1+="\[${white}\] at ";
 PS1+="\[${hostStyle}\]\h"; # host

@@ -1,11 +1,6 @@
-# Homebrew CoreUtils - newer & GNU versions of CLI utils in Mac
-# **If this PATH isn't added in other .bash_* files, then need to enable this**
-#export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-#MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-#PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH" - if needed*
+# Add `~/bin` to the `$PATH`
+export PATH="$HOME/bin:$PATH";
 
-#export CLICOLOR=1
-#export LSCOLORS=ExFxBxDxCxegedabagacad
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -37,13 +32,6 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
 
-# ** The Above function done by Homebrew Instructions:
-# bash-completion 2 - for bash 4 (/usr/local/bin/bash)
-# --> was added to /etc/opt/shells before switching via `chsh`
-#if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-#  . $(brew --prefix)/share/bash-completion/bash_completion
-#fi
-
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
 	complete -o default -o nospace -F _git g;
@@ -58,19 +46,3 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
-
-
-# FROM myOBP *** --->
-# iTerm is important:
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-
-# ** git completions aren't useful enough to justify added terminal-start-time:
-#source `brew --prefix git`/etc/bash_completion.d/git-completion.bash
-
-# ** No idea what this does:
-#case $- in
-#   *i*) source ~/.bashrc
-#esac
-
-

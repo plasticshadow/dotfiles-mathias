@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-# a few functions in NickSP's `bash_profile` alias section:
-
-cd() { builtin cd "$@"; la; }      		# Always list directory contents upon 'cd'
-#mcd() { mkdir -p "$1" && cd "$1"; }    # mcd: 		Makes new Dir and jumps inside
-										# 			*Mathias's mkd does the same but uses $@ & $_?
-trash() { command mv "$@" ~/.Trash ; }	# trash: 	Moves a file to the MacOS trash
-ql() { qlmanage -p "$*" >& /dev/null; }	# ql: 		Opens any file in MacOS Quicklook Preview
-
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_";
